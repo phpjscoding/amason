@@ -1,13 +1,15 @@
 import homeView from './views/homeproducts.js';
 import productView from './views/productview.js';
 import parseUrlAsObj from './utils.js';
-import ErrorView from './views/errorview.js'
+import ErrorView from './views/errorview.js';
+import cartView from './views/cart.js';
 
 
 
 const routes = {
 	'/':homeView,
-	'/product/:id':productView
+	'/product/:id':productView,
+	'/cart/:id':cartView
 
 }
 
@@ -23,6 +25,7 @@ const router = async ()=>{
 	const activeView = routes[activeUrl]? routes[activeUrl] : ErrorView;
 
 	content.innerHTML =  await activeView.render()
+	await productView.afterRender()
 }
 
 
